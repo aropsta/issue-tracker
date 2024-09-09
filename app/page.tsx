@@ -1,11 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import React from "react";
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Hi</h1>
-      <Link href="/users">Bay</Link>
-    </main>
-  );
-}
+const page = () => {
+  return <div>Hello</div>;
+};
+
+export default page;
