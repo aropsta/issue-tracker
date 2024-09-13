@@ -18,6 +18,7 @@ import { RiAlertFill } from "react-icons/ri";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 // interface IssueForm {
 //   title: string;
@@ -42,34 +43,40 @@ const NewIssuePage = () => {
   //nextjs router
   const router = useRouter();
 
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
   //function to submit form data to server
   async function submitRequest(data: IssueForm) {
+    console.log("Submitted", errors);
     try {
       await axios.post("/api/issues", data);
       //redirect user back to issues page
       router.push("/issues");
-    } catch (error) {
-      setError(true);
+      console.log("Posted", errors);
+    } catch (err) {
+      // setError(true);
+      console.log("Error", err);
     }
   }
 
   return (
     <Box className="max-w-xl">
-      {error && (
-        <Callout.Root className="mb-5">
-          <Callout.Icon>
-            <RiAlertFill />
-          </Callout.Icon>
-          <Callout.Text>
-            There was an error submiting your request.
-          </Callout.Text>
-        </Callout.Root>
-      )}
+      {/* {error && ( */}
+      {/*   <Callout.Root className="mb-5"> */}
+      {/*     <Callout.Icon> */}
+      {/*       <RiAlertFill /> */}
+      {/*     </Callout.Icon> */}
+      {/*     <Callout.Text> */}
+      {/*       There was an error submiting your request. */}
+      {/*     </Callout.Text> */}
+      {/*   </Callout.Root> */}
+      {/* )} */}
 
       <form
-        onSubmit={handleSubmit((data) => submitRequest(data))}
+        onSubmit={handleSubmit((data) => {
+          console.log("hi");
+          submitRequest(data);
+        })}
         className="space-y-3"
       >
         <TextField.Root
@@ -77,11 +84,7 @@ const NewIssuePage = () => {
           className=""
           {...register("title")}
         ></TextField.Root>
-        {errors.title && (
-          <Text className="block" color="red">
-            {errors.title.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         {/* Must wrap simpleMDE in a controller from react hook form as simpleMDE component doesnt support additional props with spread operator */}
         <Controller
@@ -92,11 +95,7 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" className="" {...field} />
           )}
         />
-        {errors.title && (
-          <Text color="red" className="block my-0">
-            {errors.title.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button className="self-start">Submit New Issue</Button>
       </form>
     </Box>
