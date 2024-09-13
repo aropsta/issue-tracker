@@ -11,3 +11,5 @@ Mark down editor usin EasyMDE
 - RadixUI
 - Tailwindcss:w
 - axios
+- react-loading-skeleton (for loads)
+- delay for forcing showing of loading skeletosns
