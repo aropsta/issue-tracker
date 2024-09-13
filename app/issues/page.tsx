@@ -8,7 +8,8 @@ import IssuesHeader from "./IssuesHeader";
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
-  await delay(2000);
+  // Testing loading skeleton
+  // await delay(2000);
   return (
     <>
       <IssuesHeader />
@@ -28,7 +29,7 @@ const IssuesPage = async () => {
           {issues.map((issue) => (
             <Table.Row key={issue.title}>
               <Table.Cell>
-                {issue.title}
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
 
                 <Box className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
