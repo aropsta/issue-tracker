@@ -47,7 +47,7 @@ const NewIssuePage = () => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   //function to submit form data to server
-  async function submitRequest(data: IssueForm) {
+  const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
       await axios.post("/api/issues", data);
@@ -59,7 +59,7 @@ const NewIssuePage = () => {
       setSubmitting(false);
       console.log("Error", err);
     }
-  }
+  });
 
   return (
     <Box className="max-w-xl">
@@ -74,13 +74,7 @@ const NewIssuePage = () => {
       {/*   </Callout.Root> */}
       {/* )} */}
 
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("hi");
-          submitRequest(data);
-        })}
-        className="space-y-3"
-      >
+      <form onSubmit={onSubmit} className="space-y-3">
         <TextField.Root
           placeholder="Title"
           className=""
