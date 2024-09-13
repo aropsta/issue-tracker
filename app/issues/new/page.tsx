@@ -4,6 +4,7 @@ import {
   Button,
   Callout,
   Flex,
+  Text,
   TextArea,
   TextField,
 } from "@radix-ui/themes";
@@ -14,16 +15,29 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RiAlertFill } from "react-icons/ri";
-import { RiAB } from "react-icons/ri";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { issueSchema } from "@/app/validationSchemas";
+import { z } from "zod";
 
-interface IssueForm {
-  title: string;
-  description: string;
-}
+// interface IssueForm {
+//   title: string;
+//   description: string;
+// }
+
+//inferring type from our form schema rather than creating an interface
+type IssueForm = z.infer<typeof issueSchema>;
 
 const NewIssuePage = () => {
   //react-hook-form initialization
-  const { register, control, handleSubmit } = useForm<IssueForm>();
+  //passing object with resolver makes it be able to intergrated with other form validators: zod
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IssueForm>({
+    resolver: zodResolver(issueSchema),
+  });
 
   //nextjs router
   const router = useRouter();
@@ -63,6 +77,11 @@ const NewIssuePage = () => {
           className=""
           {...register("title")}
         ></TextField.Root>
+        {errors.title && (
+          <Text className="block" color="red">
+            {errors.title.message}
+          </Text>
+        )}
 
         {/* Must wrap simpleMDE in a controller from react hook form as simpleMDE component doesnt support additional props with spread operator */}
         <Controller
@@ -73,6 +92,11 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" className="" {...field} />
           )}
         />
+        {errors.title && (
+          <Text color="red" className="block my-0">
+            {errors.title.message}
+          </Text>
+        )}
         <Button className="self-start">Submit New Issue</Button>
       </form>
     </Box>
