@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
+import delay from "delay";
 
 // interface IssueForm {
 //   title: string;
@@ -45,6 +46,7 @@ const NewIssuePage = () => {
   const router = useRouter();
 
   const [isSubmitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
   //function to submit form data to server
   const onSubmit = handleSubmit(async (data) => {
@@ -55,7 +57,7 @@ const NewIssuePage = () => {
       router.push("/issues");
       console.log("Posted", errors);
     } catch (err) {
-      // setError(true);
+      setError(true);
       setSubmitting(false);
       console.log("Error", err);
     }
@@ -63,16 +65,16 @@ const NewIssuePage = () => {
 
   return (
     <Box className="max-w-xl">
-      {/* {error && ( */}
-      {/*   <Callout.Root className="mb-5"> */}
-      {/*     <Callout.Icon> */}
-      {/*       <RiAlertFill /> */}
-      {/*     </Callout.Icon> */}
-      {/*     <Callout.Text> */}
-      {/*       There was an error submiting your request. */}
-      {/*     </Callout.Text> */}
-      {/*   </Callout.Root> */}
-      {/* )} */}
+      {error && (
+        <Callout.Root className="mb-5">
+          <Callout.Icon>
+            <RiAlertFill />
+          </Callout.Icon>
+          <Callout.Text>
+            There was an error submiting your request.
+          </Callout.Text>
+        </Callout.Root>
+      )}
 
       <form onSubmit={onSubmit} className="space-y-3">
         <TextField.Root

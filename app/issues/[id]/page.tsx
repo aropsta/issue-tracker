@@ -1,6 +1,7 @@
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
 import prisma from "@/prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
+import delay from "delay";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
@@ -15,10 +16,10 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
   });
 
   //showing nextjs 'not found' page if issue wasn't found
-  console.log("hie");
   if (!issue) notFound();
+  await delay(2500);
   return (
-    <div>
+    <>
       <Heading>{issue.title}</Heading>
       <Flex gap="4" my="2" align="center">
         <IssueStatusBadge status={issue.status} />
@@ -28,7 +29,7 @@ const IssueDetailPage = async ({ params: { id } }: Props) => {
       <Card className="prose" mt="4">
         <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
-    </div>
+    </>
   );
 };
 
