@@ -4,6 +4,7 @@ import {
   Button,
   Callout,
   Flex,
+  Spinner,
   Text,
   TextArea,
   TextField,
@@ -43,18 +44,19 @@ const NewIssuePage = () => {
   //nextjs router
   const router = useRouter();
 
-  // const [error, setError] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   //function to submit form data to server
   async function submitRequest(data: IssueForm) {
-    console.log("Submitted", errors);
     try {
+      setSubmitting(true);
       await axios.post("/api/issues", data);
       //redirect user back to issues page
       router.push("/issues");
       console.log("Posted", errors);
     } catch (err) {
       // setError(true);
+      setSubmitting(false);
       console.log("Error", err);
     }
   }
@@ -96,7 +98,10 @@ const NewIssuePage = () => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button className="self-start">Submit New Issue</Button>
+        <Button className="self-start">
+          Submit New Issue
+          {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </Box>
   );
