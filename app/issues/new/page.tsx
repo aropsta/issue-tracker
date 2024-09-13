@@ -9,8 +9,8 @@ import {
   TextArea,
   TextField,
 } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
+
 import { useForm, Controller, Form } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -20,12 +20,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
+import React from "react";
 import delay from "delay";
 
-// interface IssueForm {
-//   title: string;
-//   description: string;
-// }
+//Simple MDE stuff
+import "easymde/dist/easymde.min.css";
+//Lazy Loading simpleMDE component--------
+//  //Browser errors if this component is not extracted into a forward ref because SimpleMDE doesn't handle the ref prop that react hook forms Controller passes to it.
+const MarkdownEditor = React.forwardRef((props, ref) => (
+  <SimpleMDE placeholder="Descripion" {...props} />
+));
+MarkdownEditor.displayName = "SimpleMDE";
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+//-----------
 
 //inferring type from our form schema rather than creating an interface
 type IssueForm = z.infer<typeof issueSchema>;
@@ -89,9 +98,7 @@ const NewIssuePage = () => {
           name="description"
           control={control}
           // TODO: Customize markdown editor */}
-          render={({ field }) => (
-            <SimpleMDE placeholder="Description" className="" {...field} />
-          )}
+          render={({ field }) => <MarkdownEditor {...field} />}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button className="self-start">
