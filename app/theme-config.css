@@ -1,0 +1,4 @@
+/* Overriding some radix UI theming */
+.radix-themes {
+  --default-font-family: var(--font-inter);
+}

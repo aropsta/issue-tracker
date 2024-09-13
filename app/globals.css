@@ -1,7 +1,7 @@
 @tailwind base;
+@import "@radix-ui/themes/styles.css";
 @tailwind components;
 @tailwind utilities;
-@import "@radix-ui/themes/styles.css";
 
 .sr-only {
   visibility: visible;
