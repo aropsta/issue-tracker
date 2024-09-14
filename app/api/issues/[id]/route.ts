@@ -2,6 +2,8 @@ import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+//This file contains all endpoints of our API for updating, adding and deleting from our database
+
 interface Props {
   params: {
     id: string;
@@ -37,4 +39,21 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   });
   //Then Return it
   return NextResponse.json(updatedIssue);
+}
+
+//Mostly the same as PATCH method. Just deleting instead of updating
+export async function DELETE(request: NextRequest, { params }: Props) {
+  //get our issue to edit from db
+  const issueToDel = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  if (!issueToDel)
+    return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
+
+  await prisma.issue.delete({
+    where: { id: parseInt(params.id) },
+  });
+
+  //returning empty object after succesful deletion
+  return NextResponse.json({});
 }
