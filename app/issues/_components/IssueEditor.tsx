@@ -9,7 +9,6 @@ import {
   TextArea,
   TextField,
 } from "@radix-ui/themes";
-import dynamic from "next/dynamic";
 
 import { useForm, Controller, Form } from "react-hook-form";
 import axios from "axios";
@@ -21,20 +20,19 @@ import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import React from "react";
-import delay from "delay";
+import SimpleMDE from "react-simplemde-editor";
 
 //Simple MDE stuff
 import "easymde/dist/easymde.min.css";
 import { Issue } from "@prisma/client";
+import delay from "delay";
+
 //Lazy Loading simpleMDE component--------
 //  //Browser errors if this component is not extracted into a forward ref because SimpleMDE doesn't handle the ref prop that react hook forms Controller passes to it.
 const MarkdownEditor = React.forwardRef((props, ref) => (
   <SimpleMDE placeholder="Descripion" {...props} />
 ));
 MarkdownEditor.displayName = "SimpleMDE";
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
 //-----------
 
 //inferring type from our form schema rather than creating an interface

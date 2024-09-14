@@ -7,8 +7,6 @@ import IssuesHeader from "./IssuesHeader";
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
-  // Testing loading skeleton
-  // await delay(2000);
   return (
     <>
       <IssuesHeader />
@@ -47,5 +45,6 @@ const IssuesPage = async () => {
     </>
   );
 };
-
+//telling nextjs to NOT make this a static page.
+export const dynamic = "force-dynamic";
 export default IssuesPage;

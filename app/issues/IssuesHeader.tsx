@@ -6,7 +6,9 @@ const IssuesHeader = () => {
   return (
     <Flex className="mb-4">
       <Button>
-        <Link href="/issues/new">New issue</Link>
+        <Link href="/issues/new" prefetch={true}>
+          New issue
+        </Link>
       </Button>
     </Flex>
   );

@@ -1,7 +1,11 @@
+"use client";
 import { Box, Button, Table } from "@radix-ui/themes";
 import { Skeleton } from "@/app/components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IssuesHeader from "./IssuesHeader";
+import delay from "delay";
+
+import { usePathname } from "next/navigation";
 
 const LoadingIssuesPage = () => {
   const skeletons = [1, 2, 3, 4, 5];
