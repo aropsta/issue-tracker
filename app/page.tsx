@@ -1,7 +1,8 @@
 import React from "react";
+import Pagination from "./components/Pagination";
 
 const page = () => {
-  return <div>Hello</div>;
+  return <Pagination itemCount={100} pageSize={9} currentPage={2} />;
 };
 
 export default page;
