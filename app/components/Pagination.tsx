@@ -27,7 +27,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   }
 
   return (
-    <Flex gap="4">
+    <Flex gap="4" justify="center">
       {/* first */}
       <Button
         disabled={currentPage === 1}

@@ -1,39 +1,16 @@
 import React from "react";
-import { Box, Flex, Table } from "@radix-ui/themes";
-import { Link, ErrorMessage, IssueStatusBadge } from "@/app/components";
-import NextLink from "next/link";
+import { Flex } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
-import delay from "delay";
 import IssuesHeader from "./IssuesHeader";
-import { Issue, Status } from "@prisma/client";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { Status } from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
-import { SearchParamProp } from "../utils";
-import IssuesTable from "./IssuesTable";
+import IssuesTable, { IssueQuery } from "./IssuesTable";
+import { columnNames } from "./IssuesTable";
 
-//Our table columns that get mapped to a table header
-const columns: {
-  label: string;
-  value: keyof Issue;
-  className?: string;
-}[] = [
-  {
-    label: "Issue",
-    value: "title",
-  },
-  {
-    label: "Status",
-    value: "status",
-    className: "hidden md:table-cell",
-  },
-  {
-    label: "Created",
-    value: "createdAt",
-    className: "hidden md:table-cell",
-  },
-];
-
-const IssuesPage = async ({ searchParams }: SearchParamProp) => {
+interface Props {
+  searchParams: IssueQuery;
+}
+const IssuesPage = async ({ searchParams }: Props) => {
   //get a list of statuses from our prisma Status enum
   const statuses = Object.values(Status);
 
@@ -53,9 +30,7 @@ const IssuesPage = async ({ searchParams }: SearchParamProp) => {
   //1. Map each column value into another array
   //2. check if our searchParam is within that array
   //3. Returned object used by prisma to sort, or underfined
-  const orderBy = columns
-    .map((column) => column.value)
-    .includes(searchParams.orderBy)
+  const orderBy = columnNames.includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: "asc" }
     : undefined;
 
@@ -81,11 +56,11 @@ const IssuesPage = async ({ searchParams }: SearchParamProp) => {
   });
 
   return (
-    <>
-      <IssuesHeader />
-      <IssuesTable searchParams={searchParams} />
+    <Flex direction="column" gap="3">
+      <IssuesHeader searchParam={searchParams} />
+      <IssuesTable searchParams={searchParams} issues={issues} />
       <Pagination pageSize={pageSize} currentPage={page} itemCount={count} />
-    </>
+    </Flex>
   );
 };
 //telling nextjs to NOT make this a static page.
