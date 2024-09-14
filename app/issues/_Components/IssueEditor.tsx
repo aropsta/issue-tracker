@@ -67,17 +67,16 @@ const IssueEditor = ({ issue }: Props) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      //if there is already an issue
-      if (issue) await axios.patch("/api/issues/" + issue.id, data);
+      //if an issue exists, update it. Else create a new one
+      if (issue) await axios.patch("/api/issues/" + issue?.id, data);
       else await axios.post("/api/issues", data);
 
-      //redirect user back to issues page
+      //redirect user back to issues page and refresh its contents
       router.push("/issues");
-      console.log("Posted", errors);
+      router.refresh();
     } catch (err) {
       setError(true);
       setSubmitting(false);
-      console.log("Error", err);
     }
   });
 
@@ -96,6 +95,7 @@ const IssueEditor = ({ issue }: Props) => {
 
       <form onSubmit={onSubmit} className="space-y-3">
         <TextField.Root
+          //default value if it exists
           defaultValue={issue?.title}
           placeholder="Title"
           className=""
@@ -106,6 +106,7 @@ const IssueEditor = ({ issue }: Props) => {
         {/* Must wrap simpleMDE in a controller from react hook form as simpleMDE component doesnt support additional props with spread operator */}
         <Controller
           name="description"
+          //default value if it exists
           defaultValue={issue?.description}
           control={control}
           // TODO: Customize markdown editor */}
@@ -113,7 +114,7 @@ const IssueEditor = ({ issue }: Props) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button className="self-start">
-          {isSubmitting && <Spinner />} {!issue ? "Submit New Issue" : "Save"}
+          {isSubmitting && <Spinner />} {issue ? "Save" : "Submit New Issue"}
         </Button>
       </form>
     </Box>
