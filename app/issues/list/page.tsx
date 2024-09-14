@@ -4,9 +4,27 @@ import { Link, ErrorMessage, IssueStatusBadge } from "@/app/components";
 import prisma from "@/prisma/client";
 import delay from "delay";
 import IssuesHeader from "./IssuesHeader";
+import { Status } from "@prisma/client";
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: {
+    status: Status;
+  };
+}
+const IssuesPage = async ({ searchParams }: Props) => {
+  //get our list of status'
+  const statuses = Object.values(Status);
+
+  //Set our status if the searchParams are valid. Otherwise set to undefined so prisma will not include it as filter
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
+  const issues = await prisma.issue.findMany({
+    where: {
+      status: status,
+    },
+  });
   return (
     <>
       <IssuesHeader />
