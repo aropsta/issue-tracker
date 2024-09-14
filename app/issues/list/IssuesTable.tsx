@@ -1,15 +1,11 @@
 import React from "react";
-import { Box, Flex, Table } from "@radix-ui/themes";
 import { Link, ErrorMessage, IssueStatusBadge } from "@/app/components";
-import NextLink from "next/link";
 import prisma from "@/prisma/client";
-import delay from "delay";
-import IssuesHeader from "./IssuesHeader";
-import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import Pagination from "@/app/components/Pagination";
+import NextLink from "next/link";
 import { SearchParamProp } from "../utils";
-import IssuesTable from "./IssuesTable";
+import { Table } from "@radix-ui/themes";
+import { Issue, Status } from "@prisma/client";
 
 //Our table columns that get mapped to a table header
 const columns: {
@@ -33,7 +29,7 @@ const columns: {
   },
 ];
 
-const IssuesPage = async ({ searchParams }: SearchParamProp) => {
+const IssuesTable = async ({ searchParams }: SearchParamProp) => {
   //get a list of statuses from our prisma Status enum
   const statuses = Object.values(Status);
 
@@ -81,13 +77,49 @@ const IssuesPage = async ({ searchParams }: SearchParamProp) => {
   });
 
   return (
-    <>
-      <IssuesHeader />
-      <IssuesTable searchParams={searchParams} />
-      <Pagination pageSize={pageSize} currentPage={page} itemCount={count} />
-    </>
+    <Table.Root variant="surface">
+      <Table.Header>
+        <Table.Row>
+          {columns.map((column) => (
+            <Table.ColumnHeaderCell
+              key={column.value}
+              className={column.className}
+            >
+              <NextLink
+                href={{
+                  query: { ...searchParams, orderBy: column.value },
+                }}
+              >
+                {column.label}
+              </NextLink>
+              {column.value === searchParams.orderBy && (
+                <ArrowUpIcon className="inline" />
+              )}
+            </Table.ColumnHeaderCell>
+          ))}
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {issues.map((issue) => (
+          <Table.Row key={issue.title}>
+            <Table.Cell>
+              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+
+              <div className="block md:hidden">
+                <IssueStatusBadge status={issue.status} />
+              </div>
+            </Table.Cell>
+            <Table.Cell className="hidden md:table-cell">
+              <IssueStatusBadge status={issue.status} />
+            </Table.Cell>
+            <Table.Cell className="hidden md:table-cell">
+              {issue.createdAt.toDateString()}
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Root>
   );
 };
-//telling nextjs to NOT make this a static page.
-export const dynamic = "force-dynamic";
-export default IssuesPage;
+
+export default IssuesTable;

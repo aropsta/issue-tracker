@@ -17,12 +17,14 @@ const IssueEditor = dynamic(
   },
 );
 const EditIssuePage = async ({ params }: Props) => {
+  //Getting our issue from db
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
   });
 
   if (!issue) notFound();
 
+  //render editor, passing it details of issue
   return <IssueEditor issue={issue} />;
 };
 
