@@ -15,7 +15,7 @@ import { useForm, Controller, Form } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { RiAlertFill } from "react-icons/ri";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
@@ -61,7 +61,7 @@ const NewIssuePage = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await axios.post("/api/issues", data);
+      await axios.post("/api/issuess", data);
       //redirect user back to issues page
       router.push("/issues");
       console.log("Posted", errors);
@@ -77,7 +77,7 @@ const NewIssuePage = () => {
       {error && (
         <Callout.Root className="mb-5">
           <Callout.Icon>
-            <RiAlertFill />
+            <ExclamationTriangleIcon />
           </Callout.Icon>
           <Callout.Text>
             There was an error submiting your request.
@@ -101,10 +101,7 @@ const NewIssuePage = () => {
           render={({ field }) => <MarkdownEditor {...field} />}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button className="self-start">
-          Submit New Issue
-          {isSubmitting && <Spinner />}
-        </Button>
+        <Button className="self-start">Submit New Issue</Button>
       </form>
     </Box>
   );

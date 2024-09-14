@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { AiFillBug } from "react-icons/ai";
+import { MaskOnIcon } from "@radix-ui/react-icons";
 
 import classnames from "classnames";
 
@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <nav className="flex space-x-6 border-b mb-5 px-5 h-14 items-center">
       <Link href="/">
-        <AiFillBug />
+        <MaskOnIcon />
       </Link>
       <ul className="flex space-x-6">
         {links.map((link) => (

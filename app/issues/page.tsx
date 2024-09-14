@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Table } from "@radix-ui/themes";
+import { Box, Flex, Table } from "@radix-ui/themes";
 import { Link, ErrorMessage, IssueStatusBadge } from "@/app/components";
 import prisma from "@/prisma/client";
 import delay from "delay";
@@ -30,9 +30,9 @@ const IssuesPage = async () => {
               <Table.Cell>
                 <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
 
-                <Box className="block md:hidden">
+                <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
-                </Box>
+                </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 <IssueStatusBadge status={issue.status} />
