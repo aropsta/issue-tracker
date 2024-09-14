@@ -44,6 +44,7 @@ interface Props {
   issue?: Issue;
 }
 
+//TODO: Add ability to update issue status
 const IssueEditor = ({ issue }: Props) => {
   //react-hook-form initialization
   //passing object with resolver makes it be able to intergrated with other form validators: zod
@@ -66,7 +67,8 @@ const IssueEditor = ({ issue }: Props) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await axios.post("/api/issuess", data);
+      await delay(3300);
+      await axios.post("/api/issues", data);
       //redirect user back to issues page
       router.push("/issues");
       console.log("Posted", errors);
@@ -108,7 +110,10 @@ const IssueEditor = ({ issue }: Props) => {
           render={({ field }) => <MarkdownEditor {...field} />}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button className="self-start">Submit New Issue</Button>
+        <Button className="self-start">
+          {isSubmitting && <Spinner />}
+          {!issue ? "Submit New Issue" : "Save"}
+        </Button>
       </form>
     </Box>
   );
