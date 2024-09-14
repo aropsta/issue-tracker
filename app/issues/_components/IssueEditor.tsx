@@ -70,7 +70,7 @@ const IssueEditor = ({ issue }: Props) => {
       else await axios.post("/api/issues", data);
 
       //redirect user back to issues page and refresh its contents
-      router.push("/issues");
+      router.push("/issues/list");
       router.refresh();
     } catch (err) {
       setError(true);
