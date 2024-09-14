@@ -14,6 +14,28 @@ interface Props {
     orderBy: keyof Issue;
   };
 }
+//Our table columns that get mapped to a table header
+const columns: {
+  label: string;
+  value: keyof Issue;
+  className?: string;
+}[] = [
+  {
+    label: "Issue",
+    value: "title",
+  },
+  {
+    label: "Status",
+    value: "status",
+    className: "hidden md:table-cell",
+  },
+  {
+    label: "Created",
+    value: "createdAt",
+    className: "hidden md:table-cell",
+  },
+];
+
 const IssuesPage = async ({ searchParams }: Props) => {
   //get a list of statuses from our prisma Status enum
   const statuses = Object.values(Status);
@@ -23,34 +45,25 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
+  //Checking validity of orderBy serachParam so it can be passed to prisma
+  //1. Map each column value into another array
+  //2. check if our searchParam is within that array
+  //3. Return the object prisma will use to sort, or underfined
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
   //Get all our issues according to filter object with status field
+  //TODO: Implement sorting by decending
   const issues = await prisma.issue.findMany({
     where: {
       status: status,
     },
+    orderBy: orderBy,
   });
 
-  //Our table columns that get mapped to a table header
-  const columns: {
-    label: string;
-    value: keyof Issue;
-    className?: string;
-  }[] = [
-    {
-      label: "Issue",
-      value: "title",
-    },
-    {
-      label: "Status",
-      value: "status",
-      className: "hidden md:table-cell",
-    },
-    {
-      label: "Created",
-      value: "createdAt",
-      className: "hidden md:table-cell",
-    },
-  ];
   return (
     <>
       <IssuesHeader />
