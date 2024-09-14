@@ -5,13 +5,13 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
-  issue: Issue;
+  issueId: number;
 }
-const EditButton = ({ issue }: Props) => {
+const EditButton = ({ issueId }: Props) => {
   return (
     <Button>
       <Pencil2Icon />
-      <Link href={`/issues/${issue.id}/edit`}>Edit Issue</Link>
+      <Link href={`/issues/${issueId}/edit`}>Edit Issue</Link>
     </Button>
   );
 };
