@@ -1,5 +1,6 @@
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
+import delay from "delay";
 import { NextRequest, NextResponse } from "next/server";
 
 //This file contains all endpoints of our API for updating, adding and deleting from our database
@@ -43,6 +44,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
 
 //Mostly the same as PATCH method. Just deleting instead of updating
 export async function DELETE(request: NextRequest, { params }: Props) {
+  await delay(2000);
   //get our issue to edit from db
   const issueToDel = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
