@@ -67,8 +67,10 @@ const IssueEditor = ({ issue }: Props) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await delay(3300);
-      await axios.post("/api/issues", data);
+      //if there is already an issue
+      if (issue) await axios.patch("/api/issues/" + issue.id, data);
+      else await axios.post("/api/issues", data);
+
       //redirect user back to issues page
       router.push("/issues");
       console.log("Posted", errors);
@@ -111,8 +113,7 @@ const IssueEditor = ({ issue }: Props) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button className="self-start">
-          {isSubmitting && <Spinner />}
-          {!issue ? "Submit New Issue" : "Save"}
+          {isSubmitting && <Spinner />} {!issue ? "Submit New Issue" : "Save"}
         </Button>
       </form>
     </Box>
