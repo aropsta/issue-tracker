@@ -23,7 +23,12 @@ export default function RootLayout({
   return (
     <html data-theme="winter" lang="en">
       <body className={inter.variable}>
-        <Theme accentColor="iris" grayColor="sage" radius="none">
+        <Theme
+          accentColor="tomato"
+          grayColor="olive"
+          panelBackground="solid"
+          radius="small"
+        >
           <NavBar />
           <main className="p-4">
             <Container>{children}</Container>
