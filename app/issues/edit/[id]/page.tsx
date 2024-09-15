@@ -3,6 +3,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import Loader from "./loading";
+import { Metadata } from "next";
 
 interface Props {
   params: { id: string };
@@ -28,4 +29,9 @@ const EditIssuePage = async ({ params }: Props) => {
   return <IssueEditor issue={issue} />;
 };
 
+//Exporting page meta data for title and stuff
+export const metadata: Metadata = {
+  title: "Issue Track - Edit an issue",
+  description: "Modify an existing issue",
+};
 export default EditIssuePage;

@@ -4,6 +4,7 @@ import Chart from "./Chart";
 import Summary from "./Summary";
 import prisma from "@/prisma/client";
 import { Flex, Grid } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 const page = async ({ searchParams }: { searchParams: { page: string } }) => {
   const openCount = await prisma.issue.count({
@@ -34,4 +35,9 @@ const page = async ({ searchParams }: { searchParams: { page: string } }) => {
   );
 };
 
+//Exporting meta data for title and stuff
+export const metadata: Metadata = {
+  title: "Issue Track - Dashboard",
+  description: "View a summary of currently submitted issues",
+};
 export default page;
