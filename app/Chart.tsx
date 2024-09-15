@@ -29,11 +29,11 @@ const Chart = ({ open, closed, inProgress }: Props) => {
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           <YAxis />
-          <XAxis dataKey={"label"} />
+          <XAxis fontSize={14} dataKey={"label"} />
 
           <Bar
             dataKey={"value"}
-            barSize={16}
+            barSize={64}
             style={{
               fill: "var(--accent-9)",
             }}
