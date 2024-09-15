@@ -30,14 +30,14 @@ const Summary = ({ open, inProgress, closed }: Props) => {
         <Card key={container.label}>
           <Flex direction="column" gap="1">
             <Link
-              className="text-sm font-medium"
+              className="font-bold"
               href={`/issues/list?status=${container.status}`}
             >
-              {container.label}
-            </Link>
-            <Text size="5" className="font-bold">
               {container.value}
-            </Text>
+              <Text size="5" className="text-sm block font-medium">
+                {container.label}
+              </Text>
+            </Link>
           </Flex>
         </Card>
       ))}
