@@ -1,5 +1,6 @@
 import React from "react";
 import LatestIssues from "./LatestIssues";
+import Chart from "./Chart";
 import Summary from "./Summary";
 import prisma from "@/prisma/client";
 
@@ -20,6 +21,7 @@ const page = async ({ searchParams }: { searchParams: { page: string } }) => {
         closed={closedCount}
         inProgress={progressCount}
       />
+      <Chart open={openCount} closed={closedCount} inProgress={progressCount} />
       <LatestIssues />
     </>
   );

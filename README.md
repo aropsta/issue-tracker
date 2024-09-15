@@ -15,3 +15,4 @@ Mark down editor usin EasyMDE
 - delay for forcing showing of loading skeletosns
 - react-markdown for previewing/viewing markdown content
 - tailwind typography for properly rendering h1's and stuff as they are not initially styled
+- recharts for rechards
