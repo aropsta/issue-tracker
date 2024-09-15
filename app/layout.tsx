@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "./NavBar";
 import { Container, Theme, ThemePanel } from "@radix-ui/themes";
+import { SessionProvider } from "next-auth/react";
+import AuthProvider from "./auth/Provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,19 +25,21 @@ export default function RootLayout({
   return (
     <html data-theme="winter" lang="en">
       <body className={inter.variable}>
-        <Theme
-          accentColor="tomato"
-          grayColor="olive"
-          panelBackground="solid"
-          radius="small"
-        >
-          <NavBar />
-          <main className="p-4">
-            <Container>{children}</Container>
-          </main>
-          {/* Component to pick radix ui them, then copy it */}
-          {/* <ThemePanel></ThemePanel> */}
-        </Theme>
+        <AuthProvider>
+          <Theme
+            accentColor="tomato"
+            grayColor="olive"
+            panelBackground="solid"
+            radius="small"
+          >
+            <NavBar />
+            <main className="p-4">
+              <Container>{children}</Container>
+            </main>
+            {/* Component to pick radix ui them, then copy it */}
+            {/* <ThemePanel></ThemePanel> */}
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   );
