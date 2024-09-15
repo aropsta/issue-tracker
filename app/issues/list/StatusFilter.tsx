@@ -3,14 +3,9 @@ import { Status } from "@prisma/client";
 import { Button, Select } from "@radix-ui/themes";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useRef, useState } from "react";
-import ClearButton from "./ClearButton";
 
 //Array to use to map our Select.Item elements
 const statuses: { label: string; value: Status | "ALL" }[] = [
-  {
-    label: "All",
-    value: "ALL",
-  },
   {
     label: "Open",
     value: "OPEN",
@@ -48,8 +43,8 @@ const StatusFilter = () => {
   }
 
   function onReset() {
-    router.push(`/issues/list`);
     setValue("");
+    router.push(`/issues/list`);
   }
 
   return (

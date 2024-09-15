@@ -1,16 +1,7 @@
 "use client";
-import {
-  Box,
-  Button,
-  Callout,
-  Flex,
-  Spinner,
-  Text,
-  TextArea,
-  TextField,
-} from "@radix-ui/themes";
+import { Box, Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 
-import { useForm, Controller, Form } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -20,20 +11,20 @@ import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import React from "react";
-import SimpleMDE from "react-simplemde-editor";
+import { Issue } from "@prisma/client";
 
 //Simple MDE stuff
+import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { Issue } from "@prisma/client";
 import delay from "delay";
 
-//Lazy Loading simpleMDE component--------
-//  //Browser errors if this component is not extracted into a forward ref because SimpleMDE doesn't handle the ref prop that react hook forms Controller passes to it.
+//-------Lazy Loading simpleMDE component--------
+//Browser errors if this component is not extracted into a forward ref because SimpleMDE doesn't handle the ref prop that react hook forms Controller passes to it.
 const MarkdownEditor = React.forwardRef((props, ref) => (
   <SimpleMDE placeholder="Descripion" {...props} />
 ));
 MarkdownEditor.displayName = "SimpleMDE";
-//-----------
+//-----------||-------------
 
 //inferring type from our form schema rather than creating an interface
 type IssueForm = z.infer<typeof issueSchema>;
@@ -58,6 +49,7 @@ const IssueEditor = ({ issue }: Props) => {
   //nextjs router
   const router = useRouter();
 
+  //States to manage Form (or editor in this case)
   const [isSubmitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
@@ -80,6 +72,7 @@ const IssueEditor = ({ issue }: Props) => {
 
   return (
     <Box className="max-w-xl">
+      {/* Radix UI Alert component for when something goes wrong when submitting */}
       {error && (
         <Callout.Root className="mb-5">
           <Callout.Icon>
