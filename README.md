@@ -7,6 +7,7 @@ Mark down editor usin EasyMDE
 # Tech
 
 - EasyMDE (react-simpleMDE)
+- NextAUth authentication for user login
 - react-hook-form
 - RadixUI
 - Tailwindcss:w
