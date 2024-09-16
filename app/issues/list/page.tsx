@@ -26,13 +26,14 @@ const IssuesPage = async ({ searchParams }: Props) => {
     status,
   };
 
-  // Creating filter objcet for sort order
+  // Creating filter object for sort order
   //Checking validity of orderBy serachParam and set it to a query object for prisma prisma
   //1. Map each column value into another array
   //2. check if our searchParam is within that array
   //3. Returned object used by prisma to sort, or underfined
+
   const orderBy = columnNames.includes(searchParams.orderBy)
-    ? { [searchParams.orderBy]: "asc" }
+    ? { [searchParams.orderBy]: searchParams.direction }
     : undefined;
 
   //variables for pagination

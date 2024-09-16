@@ -66,7 +66,7 @@ function UserStatus() {
   const { status, data: session } = useSession();
 
   //return different markup according to nextauth session/status
-  if (status === "loading") return <Skeleton width="4rem" height="1.75rem" />;
+  if (status === "loading") return <Skeleton width="4rem" height="2.3rem" />;
   if (status === "unauthenticated")
     return (
       <>

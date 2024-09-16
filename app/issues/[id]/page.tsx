@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client";
-import { Box, Button, Flex, Grid } from "@radix-ui/themes";
+import { Box, Button, Callout, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditButton from "./EditButton";
 import IssueDetails from "./IssueDetails";
@@ -8,6 +8,7 @@ import { cache } from "react";
 import { getServerSession } from "next-auth";
 import { authObject } from "@/app/auth/authObject";
 import AssignSelector from "./AssignSelector";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 interface Props {
   params: {
@@ -24,10 +25,6 @@ const fetchIssue = cache((issueId: number) =>
 );
 
 const IssueDetailsPage = async ({ params: { id } }: Props) => {
-  // const issue = await prisma.issue.findUnique({
-  //   where: { id: parseInt(id) },
-  // });
-
   //Current user session in a server componenet
   const session = await getServerSession(authObject);
 
@@ -45,13 +42,22 @@ const IssueDetailsPage = async ({ params: { id } }: Props) => {
 
       {/* Only render delete and edit buttons if there is a user session */}
       <Flex className="col-span-1" direction="column" gap="3">
-        {session && (
+        {session ? (
           <>
             <EditButton issueId={issue.id} />
             <DeleteButton issueId={issue.id} />
+            <AssignSelector issue={issue} />
           </>
+        ) : (
+          <Callout.Root className="">
+            <Callout.Icon>
+              <InfoCircledIcon />
+            </Callout.Icon>
+            <Callout.Text>
+              Sign in with Google to see more options!
+            </Callout.Text>
+          </Callout.Root>
         )}
-        <AssignSelector issue={issue} />
       </Flex>
     </Grid>
   );

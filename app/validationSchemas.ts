@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-//Schema for when creating issues. Require title and description
+//Schema for when creating new issues. Require title and description
 export const createIssueSchema = z.object({
   title: z.string().min(1, "Title is required").max(255),
   description: z.string().min(1, "Description is required").max(65535),
