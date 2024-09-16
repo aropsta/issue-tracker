@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "./auth/Provider";
+import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,21 +26,26 @@ export default function RootLayout({
   return (
     <html data-theme="winter" lang="en">
       <body className={inter.variable}>
-        <AuthProvider>
-          <Theme
-            accentColor="yellow"
-            grayColor="olive"
-            panelBackground="solid"
-            radius="small"
-          >
-            <NavBar />
-            <main className="p-4">
-              <Container>{children}</Container>
-            </main>
-            {/* Component to pick radix ui them, then copy it */}
-            {/* <ThemePanel></ThemePanel> */}
-          </Theme>
-        </AuthProvider>
+        {/* query client provider for using react query */}
+        <QueryClientProvider>
+          {/* auth provider for using next-auth */}
+          <AuthProvider>
+            {/* reat ui theme wrapper */}
+            <Theme
+              accentColor="yellow"
+              grayColor="olive"
+              panelBackground="solid"
+              radius="small"
+            >
+              <NavBar />
+              <main className="p-4">
+                <Container>{children}</Container>
+              </main>
+              {/* Component to pick radix ui them, then copy it */}
+              {/* <ThemePanel></ThemePanel> */}
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
