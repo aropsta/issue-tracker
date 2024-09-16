@@ -1,13 +1,12 @@
 "use client";
 import { Box, Button, Callout, Spinner, TextField } from "@radix-ui/themes";
-
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { issueSchema } from "@/app/validationSchemas";
+import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import React from "react";
@@ -27,7 +26,7 @@ MarkdownEditor.displayName = "SimpleMDE";
 //-----------||-------------
 
 //inferring type from our form schema rather than creating an interface
-type IssueForm = z.infer<typeof issueSchema>;
+type IssueForm = z.infer<typeof createIssueSchema>;
 
 interface Props {
   issue?: Issue;
@@ -43,7 +42,7 @@ const IssueEditor = ({ issue }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueForm>({
-    resolver: zodResolver(issueSchema),
+    resolver: zodResolver(createIssueSchema),
   });
 
   //nextjs router
@@ -94,10 +93,9 @@ const IssueEditor = ({ issue }: Props) => {
         ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
-        {/* Must wrap simpleMDE in a controller from react hook form as simpleMDE component doesnt support additional props with spread operator */}
+        {/* Must wrap simpleMDE in a controller from react hook form as the simpleMDE component doesnt support additional props with spread operator */}
         <Controller
           name="description"
-          //default value if it exists
           defaultValue={issue?.description}
           control={control}
           // TODO: Customize markdown editor */}

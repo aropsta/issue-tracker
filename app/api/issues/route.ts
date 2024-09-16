@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
-import { issueSchema } from "../../validationSchemas";
+import { createIssueSchema } from "../../validationSchemas";
 import { getServerSession } from "next-auth";
 import { authObject } from "@/app/auth/authObject";
 
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
 
   //validating the body against our schema
-  const validation = issueSchema.safeParse(body);
+  const validation = createIssueSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
 
