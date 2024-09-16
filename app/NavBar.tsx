@@ -32,7 +32,7 @@ const NavBar = () => {
               size="1"
               className="self-center"
               onCheckedChange={() =>
-                setTheme(theme === "light" ? "dark" : "light")
+                setTheme(theme === "dark" ? "light" : "dark")
               }
             />
           </Flex>

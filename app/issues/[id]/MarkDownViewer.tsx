@@ -10,7 +10,10 @@ interface Props {
 }
 const MarkDownViewer = ({ issue }: Props) => {
   const { theme } = useTheme();
-  const fontColor = theme === "light" ? "text-zinc-700" : "text-stone-300";
+  const fontColor =
+    theme === "light"
+      ? "text-zinc-800 prose-light"
+      : "text-stone-300 prose-dark";
   return (
     <Card className={`prose max-w-full ${fontColor}`} mt="4">
       <ReactMarkdown>{issue.description}</ReactMarkdown>

@@ -2,6 +2,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.prose-dark {
+  --tw-prose-body: #ffffff;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #ffffff;
+  --tw-prose-links: #ffffff;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #ffffff;
+  --tw-prose-bullets: #ffffff;
+  --tw-prose-hr: #ffffff;
+  --tw-prose-quotes: #ffffff;
+  --tw-prose-quote-borders: #ffffff;
+  --tw-prose-captions: #ffffff;
+  --tw-prose-code: #ffffff;
+  --tw-prose-pre-code: #ffffff;
+  --tw-prose-pre-bg: #1e293b;
+  --tw-prose-th-borders: #ffffff;
+  --tw-prose-td-borders: #ffffff;
+}
+
+.prose-light {
+  --tw-prose-body: #000000;
+  --tw-prose-headings: #000000;
+  --tw-prose-lead: #000000;
+  --tw-prose-links: #000000;
+  --tw-prose-bold: #000000;
+  --tw-prose-counters: #000000;
+  --tw-prose-bullets: #000000;
+  --tw-prose-hr: #000000;
+  --tw-prose-quotes: #000000;
+  --tw-prose-quote-borders: #000000;
+  --tw-prose-captions: #000000;
+  --tw-prose-code: #000000;
+  --tw-prose-pre-code: #000000;
+  --tw-prose-pre-bg: #f3f4f6;
+  --tw-prose-th-borders: #000000;
+  --tw-prose-td-borders: #000000;
+}
+
 .sr-only {
   visibility: visible;
 
