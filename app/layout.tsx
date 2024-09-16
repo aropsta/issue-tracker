@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <AuthProvider>
           <Theme
-            accentColor="tomato"
+            accentColor="yellow"
             grayColor="olive"
             panelBackground="solid"
             radius="small"
