@@ -24,6 +24,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   //Creating validation object from our zod schema, passing it the request Body
   const validation = patchIssueSchema.safeParse(body);
 
+  console.log("new request", body);
   //if validation of form fails, return the errors and status 400: bad request
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });

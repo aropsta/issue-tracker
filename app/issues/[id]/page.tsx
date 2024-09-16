@@ -44,13 +44,15 @@ const IssueDetailsPage = async ({ params: { id } }: Props) => {
       </Box>
 
       {/* Only render delete and edit buttons if there is a user session */}
-      {session && (
-        <Flex className="col-span-1" direction="column" gap="3">
-          <AssignSelector />
-          <EditButton issueId={issue.id} />
-          <DeleteButton issueId={issue.id} />
-        </Flex>
-      )}
+      <Flex className="col-span-1" direction="column" gap="3">
+        {session && (
+          <>
+            <EditButton issueId={issue.id} />
+            <DeleteButton issueId={issue.id} />
+          </>
+        )}
+        <AssignSelector issue={issue} />
+      </Flex>
     </Grid>
   );
 };

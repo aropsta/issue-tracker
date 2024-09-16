@@ -85,33 +85,29 @@ function UserStatus() {
 
   if (status === "authenticated")
     return (
-      <>
-        {status === "authenticated" && (
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <Avatar
-                src={session.user!.image!}
-                fallback="?"
-                size="3"
-                className="cursor-pointer hover:brightness-75"
-                // referrerPolicy Sometimes helps google images load
-                referrerPolicy="no-referrer"
-              />
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content>
-              <DropdownMenu.Label>{session.user?.email}</DropdownMenu.Label>
-              <DropdownMenu.Item>
-                <Link
-                  href="/api/auth/signout"
-                  className="w-[100%] h-[100%] content-center"
-                >
-                  Sign out
-                </Link>
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-        )}
-      </>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session.user!.image!}
+            fallback="U"
+            size="3"
+            className="cursor-pointer hover:brightness-75"
+            // referrerPolicy Sometimes helps google images load
+            referrerPolicy="no-referrer"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>{session.user?.email}</DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link
+              href="/api/auth/signout"
+              className="w-[100%] h-[100%] content-center"
+            >
+              Sign out
+            </Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     );
 }
 export default NavBar;
