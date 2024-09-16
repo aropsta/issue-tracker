@@ -7,6 +7,7 @@ import DeleteButton from "./DeleteButton";
 import { cache } from "react";
 import { getServerSession } from "next-auth";
 import { authObject } from "@/app/auth/authObject";
+import AssignSelector from "./AssignSelector";
 
 interface Props {
   params: {
@@ -45,6 +46,7 @@ const IssueDetailsPage = async ({ params: { id } }: Props) => {
       {/* Only render delete and edit buttons if there is a user session */}
       {session && (
         <Flex className="col-span-1" direction="column" gap="3">
+          <AssignSelector />
           <EditButton issueId={issue.id} />
           <DeleteButton issueId={issue.id} />
         </Flex>

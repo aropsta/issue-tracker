@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Table } from "@radix-ui/themes";
+import { Box, Button, Table, Flex } from "@radix-ui/themes";
 import { Skeleton } from "@/app/components";
 import React, { useEffect, useState } from "react";
 import IssuesHeader from "./IssuesHeader";
@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 const LoadingIssuesPage = () => {
   const skeletons = [1, 2, 3, 4, 5];
   return (
-    <>
+    <Flex gap="3" direction="column">
       <IssuesHeader />
       <Table.Root variant="surface">
         <Table.Header>
@@ -44,7 +44,7 @@ const LoadingIssuesPage = () => {
           ))}
         </Table.Body>
       </Table.Root>
-    </>
+    </Flex>
   );
 };
 

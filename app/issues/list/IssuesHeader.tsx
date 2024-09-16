@@ -4,7 +4,7 @@ import React from "react";
 import StatusFilter from "./StatusFilter";
 import { IssueQuery } from "./IssuesTable";
 
-const IssuesHeader = ({ searchParam }: { searchParam: IssueQuery }) => {
+const IssuesHeader = () => {
   return (
     <Flex justify="between">
       <Flex gap="2" align="center">

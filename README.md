@@ -2,7 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Feautures
 
-Mark down editor usin EasyMDE
+View, edit, create and delete issues
+sorting and filtering
+pagination
+Mark down editor
+User login and authentication
+Asssign issues to different users
 
 # Tech
 
