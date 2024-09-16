@@ -7,7 +7,6 @@ import Pagination from "@/app/components/Pagination";
 import IssuesTable, { IssueQuery } from "./IssuesTable";
 import { columnNames } from "./IssuesTable";
 import { Metadata } from "next";
-import delay from "delay";
 
 interface Props {
   searchParams: IssueQuery;
@@ -67,8 +66,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
 };
 //telling nextjs to NOT make this a static page.
 export const dynamic = "force-dynamic";
-export default IssuesPage;
+
+//Metadata for title and stuff
 export const metadata: Metadata = {
   title: "Issue Track - List of issues",
   description: "View all issues",
 };
+
+export default IssuesPage;
