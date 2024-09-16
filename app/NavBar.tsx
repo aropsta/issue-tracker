@@ -3,33 +3,45 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { MaskOnIcon } from "@radix-ui/react-icons";
-import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
+import { Text, Avatar, Button, DropdownMenu, Switch } from "@radix-ui/themes";
 import { AiFillBug } from "react-icons/ai";
+import { BsBug, BsBugFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 
 import classnames from "classnames";
 import { Box, Container, Flex } from "@radix-ui/themes";
 import Skeleton from "./components/Skeleton";
+import { useTheme } from "next-themes";
 
 const NavBar = () => {
+  const { theme, setTheme } = useTheme();
   return (
     <nav className="flex space-x-6 border-b mb-5 px-5 py-3">
       <Container>
         <Flex className="flex justify-between items-center">
-          <Flex className="gap-3">
-            <Link href="/" className="self-center ">
+          <Flex className="gap-3 items-center">
+            <Link href="/">
               {/* <MaskOnIcon /> */}
-              <AiFillBug />
+              <BsBug />
             </Link>
-            <NavLinks />
+            <NavLinks theme={theme!} />
           </Flex>
-          <UserStatus />
+          <Flex className="items-center" gap="2">
+            <UserStatus />
+            <Switch
+              size="1"
+              className="self-center"
+              onCheckedChange={() =>
+                setTheme(theme === "light" ? "dark" : "light")
+              }
+            />
+          </Flex>
         </Flex>
       </Container>
     </nav>
   );
 };
-function NavLinks() {
+function NavLinks({ theme }: { theme: string }) {
   const currentPath = usePathname();
   const links = [
     {
@@ -47,11 +59,18 @@ function NavLinks() {
         <li key={link.href}>
           <Link
             href={link.href}
+            //Using library to dynamically assign class names
             className={classnames({
-              "text-zinc-800": link.href === currentPath,
-              "text-zinc-500": link.href !== currentPath,
-              "hover:text-zinc-800 transition-colors hover:border-b-2 border-orange-500":
-                true,
+              "text-zinc-800 font-semibold":
+                link.href === currentPath && theme === "light",
+              "text-zinc-500": link.href !== currentPath && theme === "light",
+              "text-stone-100 font-semibold":
+                link.href === currentPath && theme === "dark",
+              "text-stone-400": link.href !== currentPath && theme === "dark",
+              "hover:text-zinc-800 transition-colors hover:border-b-2 border-yellow-400":
+                theme === "light",
+              "hover:text-stone-100 transition-colors hover:border-b-2 border-yellow-400":
+                theme === "dark",
             })}
           >
             {link.label}

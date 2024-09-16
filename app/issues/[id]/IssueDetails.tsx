@@ -3,6 +3,7 @@ import { Issue } from "@prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import MarkDownViewer from "./MarkDownViewer";
 
 interface Props {
   issue: Issue;
@@ -16,9 +17,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
       {/* prose for being able to render html typography */}
-      <Card className="prose max-w-full" mt="4">
-        <ReactMarkdown>{issue.description}</ReactMarkdown>
-      </Card>
+      <MarkDownViewer issue={issue} />
     </>
   );
 };

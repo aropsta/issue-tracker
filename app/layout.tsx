@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "./NavBar";
 import { Container, Theme, ThemePanel } from "@radix-ui/themes";
-import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import AuthProvider from "./auth/Provider";
 import QueryClientProvider from "./QueryClientProvider";
 
@@ -30,20 +30,22 @@ export default function RootLayout({
         <QueryClientProvider>
           {/* auth provider for using next-auth */}
           <AuthProvider>
-            {/* reat ui theme wrapper */}
-            <Theme
-              accentColor="yellow"
-              grayColor="olive"
-              panelBackground="solid"
-              radius="small"
-            >
-              <NavBar />
-              <main className="p-4">
-                <Container>{children}</Container>
-              </main>
-              {/* Component to pick radix ui them, then copy it */}
-              {/* <ThemePanel></ThemePanel> */}
-            </Theme>
+            <ThemeProvider attribute="class">
+              {/* reat ui theme wrapper */}
+              <Theme
+                accentColor="yellow"
+                grayColor="olive"
+                panelBackground="solid"
+                radius="small"
+              >
+                <NavBar />
+                <main className="p-4">
+                  <Container>{children}</Container>
+                </main>
+                {/* Component to pick radix ui them, then copy it */}
+                {/* <ThemePanel></ThemePanel> */}
+              </Theme>
+            </ThemeProvider>
           </AuthProvider>
         </QueryClientProvider>
       </body>

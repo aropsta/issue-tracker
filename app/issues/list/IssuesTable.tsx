@@ -23,7 +23,8 @@ const IssuesTable = async ({ searchParams, issues }: Props) => {
   else direction = "asc";
 
   function arrowIcon(): ReactNode {
-    if (direction == "asc") return <AiOutlineArrowUp className="inline" />;
+    if (direction == "desc") return <AiOutlineArrowUp className="inline" />;
+
     return <AiOutlineArrowDown className="inline" />;
   }
 

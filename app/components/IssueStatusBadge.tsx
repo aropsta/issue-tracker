@@ -8,19 +8,19 @@ interface Props {
 //defining a key value pair with typescript record
 const statusMap: Record<
   Status,
-  { label: string; color: "red" | "green" | "violet" }
+  { label: string; color: "green" | "gray" | "blue" }
 > = {
   OPEN: {
     label: "Open",
-    color: "red",
+    color: "blue",
   },
   IN_PROGRESS: {
     label: "In progress",
-    color: "violet",
+    color: "green",
   },
   CLOSED: {
     label: "Closed",
-    color: "green",
+    color: "gray",
   },
 };
 const IssueStatusBadge = ({ status }: Props) => {
