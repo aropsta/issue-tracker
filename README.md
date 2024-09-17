@@ -1,24 +1,26 @@
 # Issue Tracker
 
 A fullstack application track and manage different issues or tickets.
-![Dashbaord](/public/Dashboard)
+
+## ![List View](/public/list.png)|
+
+-
 
 ## Feautures
 
-> View, edit, create and delete issues.
-> ![List View](/public/list.png)
-
-> Assign tickets to different users
+- View, edit, create and delete issues.
+- Sorting and filtering with various params
+- Pagination
+- Login and authentication with Google
+- Assign tickets to different users
 
 ### Edit in markdown
 
 ![Edit](/public/edit.png)
 
-### And more
+### Dark mode
 
-- Sorting and filtering with various params
-- Pagination
-- Login and authentication with Google
+![Dark mode](/public/dark.png)
 
 ## Tech Stack
 
@@ -27,10 +29,10 @@ A fullstack application track and manage different issues or tickets.
 - Next.js |  React | Typescript
 - Tailwindcss | RadixUI Themes
 - React Query | Axios
-- Reac Hook Form
+- React Hook Form
 - Recharts
 
 ### Backend
 
 - MySQL | Prisma
-- NextAuth user authentication
+- NextAuth
