@@ -1,16 +1,12 @@
 # Issue Tracker
 
 A fullstack application track and manage different issues or tickets.
-![Dashbaord][./public/Dashboard]
+![Dashbaord][app/public/Dashboard.png]
 
 ## Feautures
 
-|        Dark Mode         |        Light Mode         |
-| :----------------------: | :-----------------------: |
-| ![](https://...Dark.png) | ![](https://...Ocean.png) |
-
 > View, edit, create and delete issues.
-> ![List View][./public/list]
+> ![List View][app/public/list]
 
 > Assign tickets to different users
 
