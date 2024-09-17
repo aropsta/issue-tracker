@@ -6,13 +6,13 @@ A fullstack application track and manage different issues or tickets.
 ## Feautures
 
 > View, edit, create and delete issues.
-> ![List View](/public/list)
+> ![List View](/public/list.png)
 
 > Assign tickets to different users
 
 ### Edit in markdown
 
-![Edit](/public/edit)
+![Edit](/public/edit.png)
 
 ### And more
 
