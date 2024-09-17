@@ -7,6 +7,8 @@ import ReactMarkdown from "react-markdown";
 
 interface Props {
   issue: Issue;
+
+  //
 }
 const MarkDownViewer = ({ issue }: Props) => {
   const { theme } = useTheme();

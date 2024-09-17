@@ -3,7 +3,7 @@ import { Issue } from "@prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import MarkDownViewer from "./MarkDownViewer";
+import MarkDownViewer from "../_components/MarkDownViewer";
 
 interface Props {
   issue: Issue;
