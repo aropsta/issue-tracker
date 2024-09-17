@@ -1,7 +1,7 @@
 # Issue Tracker
 
 A fullstack application track and manage different issues or tickets.
-![Dashbaord][/app/public/Dashboard.png]
+![Dashbaord][/public/Dashboard.png]
 
 ## Feautures
 
