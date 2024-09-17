@@ -1,18 +1,18 @@
 # Issue Tracker
 
 A fullstack application track and manage different issues or tickets.
-![Dashbaord][/public/Dashboard.png]
+![Dashbaord](/public/Dashboard)
 
 ## Feautures
 
 > View, edit, create and delete issues.
-> ![List View][app/public/list]
+> ![List View](/public/list)
 
 > Assign tickets to different users
 
 ### Edit in markdown
 
-![Edit][./public/edit]
+![Edit](/public/edit)
 
 ### And more
 
