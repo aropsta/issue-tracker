@@ -1,8 +1,8 @@
 # Issue Tracker
 
-A fullstack application track and manage different issues or tickets.
+A fullstack application used to track and manage different tickets: Feature requests, issues or bugs
 
-## ![List View](/public/list.png)|
+## ![List View](/public/list.png)
 
 ## Feautures
 
