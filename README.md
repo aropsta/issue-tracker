@@ -4,17 +4,15 @@ A fullstack application track and manage different issues or tickets.
 
 ## ![List View](/public/list.png)|
 
--
-
 ## Feautures
 
 - View, edit, create and delete issues.
+- Assign tickets to different users
 - Sorting and filtering with various params
 - Pagination
-- Login and authentication with Google
-- Assign tickets to different users
+- Google login and authentication
 
-### Edit in markdown
+## MarkDown Editor
 
 ![Edit](/public/edit.png)
 
