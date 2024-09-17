@@ -1,24 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Issue Tracker
+
+A fullstack application track and manage different issues or tickets.
+![Dashbaord][./public/Dashboard]
 
 ## Feautures
 
-View, edit, create and delete issues
-sorting and filtering
-pagination
-Mark down editor
-User login and authentication
-Asssign issues to different users
+|        Dark Mode         |        Light Mode         |
+| :----------------------: | :-----------------------: |
+| ![](https://...Dark.png) | ![](https://...Ocean.png) |
 
-# Tech
+> View, edit, create and delete issues.
+> ![List View][./public/list]
 
-- EasyMDE (react-simpleMDE)
-- NextAUth authentication for user login
-- react-hook-form
-- RadixUI
-- Tailwindcss:w
-- axios
-- react-loading-skeleton (for loads)
-- delay for forcing showing of loading skeletosns
-- react-markdown for previewing/viewing markdown content
-- tailwind typography for properly rendering h1's and stuff as they are not initially styled
-- recharts for rechards
+> Assign tickets to different users
+
+### Edit in markdown
+
+![Edit][./public/edit]
+
+### And more
+
+- Sorting and filtering with various params
+- Pagination
+- Login and authentication with Google
+
+## Tech Stack
+
+### Frontend
+
+- Next.js |  React | Typescript
+- Tailwindcss | RadixUI Themes
+- React Query | Axios
+- Reac Hook Form
+- Recharts
+
+### Backend
+
+- MySQL | Prisma
+- NextAuth user authentication

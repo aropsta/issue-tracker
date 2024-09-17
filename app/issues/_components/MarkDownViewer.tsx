@@ -7,18 +7,14 @@ import ReactMarkdown from "react-markdown";
 
 interface Props {
   issue: Issue;
-
-  //
 }
 const MarkDownViewer = ({ issue }: Props) => {
   const { theme } = useTheme();
   const fontColor =
-    theme === "dark"
-      ? "text-stone-300 prose-dark"
-      : "text-zinc-800 prose-light";
+    theme == "dark" ? "text-stone-300 prose-dark" : "text-zinc-800 prose-light";
   return (
     <Card className={`prose max-w-full ${fontColor}`} mt="4">
-      <ReactMarkdown>{issue.description}</ReactMarkdown>
+      <ReactMarkdown className={fontColor}>{issue.description}</ReactMarkdown>
     </Card>
   );
 };

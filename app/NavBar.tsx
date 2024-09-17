@@ -3,7 +3,14 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { MaskOnIcon } from "@radix-ui/react-icons";
-import { Text, Avatar, Button, DropdownMenu, Switch } from "@radix-ui/themes";
+import {
+  Text,
+  Avatar,
+  Button,
+  DropdownMenu,
+  Switch,
+  Checkbox,
+} from "@radix-ui/themes";
 import { AiFillBug } from "react-icons/ai";
 import { BsBug, BsBugFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
@@ -14,7 +21,9 @@ import Skeleton from "./components/Skeleton";
 import { useTheme } from "next-themes";
 
 const NavBar = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  console.log(theme);
+  if (theme === "dark") console.log(true);
   return (
     <nav className="flex space-x-6 border-b mb-5 px-5 py-3">
       <Container>
@@ -28,9 +37,12 @@ const NavBar = () => {
           </Flex>
           <Flex className="items-center" gap="2">
             <UserStatus />
+
             <Switch
+              checked={resolvedTheme === "dark"}
               size="1"
               className="self-center"
+              defaultChecked={false}
               onCheckedChange={() =>
                 setTheme(theme === "dark" ? "light" : "dark")
               }
