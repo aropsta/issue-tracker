@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { MaskOnIcon } from "@radix-ui/react-icons";
@@ -14,6 +15,7 @@ import {
 import { AiFillBug } from "react-icons/ai";
 import { BsBug, BsBugFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
+import icon from "../public/bug.png";
 
 import classnames from "classnames";
 import { Box, Container, Flex } from "@radix-ui/themes";
@@ -30,8 +32,13 @@ const NavBar = () => {
         <Flex className="flex justify-between items-center">
           <Flex className="gap-3 items-center">
             <Link href="/">
-              {/* <MaskOnIcon /> */}
-              <BsBug />
+              <Image
+                className="self-center"
+                src={icon}
+                alt="bug"
+                width={36}
+                height={36}
+              />
             </Link>
             <NavLinks theme={theme!} />
           </Flex>

@@ -37,7 +37,10 @@ const page = async ({ searchParams }: { searchParams: { page: string } }) => {
 
 //Exporting page meta data for title and stuff
 export const metadata: Metadata = {
-  title: "Issue Track - Dashboard",
+  title: "Issue Tracker - Dashboard",
   description: "View a summary of currently submitted issues",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 export default page;
