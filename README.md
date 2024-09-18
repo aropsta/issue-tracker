@@ -2,7 +2,7 @@
 
 A fullstack application used to track and manage different tickets: Feature requests, issues or bugs
 
-![Screenshot](/public/list.png)
+![Screenshot](public/list.png)
 
 ## Feautures
 
@@ -14,11 +14,11 @@ A fullstack application used to track and manage different tickets: Feature requ
 
 ## MarkDown Editor
 
-![Screenshot](/public/edit.png)
+![Screenshot](public/edit.png)
 
 ### Dark mode
 
-![Screenshot](/public/dark.png)
+![Screenshot](public/dark.png)
 
 ## Tech Stack
 
