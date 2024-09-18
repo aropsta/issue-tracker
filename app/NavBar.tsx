@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MaskOnIcon } from "@radix-ui/react-icons";
 import {
@@ -23,9 +23,15 @@ import Skeleton from "./components/Skeleton";
 import { useTheme } from "next-themes";
 
 const NavBar = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  console.log(theme);
-  if (theme === "dark") console.log(true);
+  //theme from local storage using next-theme
+  const { setTheme, resolvedTheme } = useTheme();
+
+  //These hooks are used for the Switch componenet. Without them the check state is unreliable on page refreshes. We ensure that as soon as resolvedTheme is available, we set the checked state
+  const [darkmode, setDarkmode] = useState(false);
+  useEffect(() => {
+    setDarkmode(resolvedTheme === "dark");
+  }, [resolvedTheme]);
+
   return (
     <nav className="flex space-x-6 border-b mb-5 px-5 py-3">
       <Container>
@@ -40,19 +46,19 @@ const NavBar = () => {
                 height={36}
               />
             </Link>
-            <NavLinks theme={theme!} />
+            <NavLinks checked={darkmode} />
           </Flex>
           <Flex className="items-center" gap="2">
             <UserStatus />
 
             <Switch
-              checked={resolvedTheme === "dark"}
+              checked={darkmode}
               size="1"
               className="self-center"
-              defaultChecked={false}
-              onCheckedChange={() =>
-                setTheme(theme === "dark" ? "light" : "dark")
-              }
+              onCheckedChange={() => {
+                setTheme(darkmode ? "light" : "dark");
+                setDarkmode(!darkmode);
+              }}
             />
           </Flex>
         </Flex>
@@ -60,7 +66,7 @@ const NavBar = () => {
     </nav>
   );
 };
-function NavLinks({ theme }: { theme: string }) {
+function NavLinks({ checked }: { checked: boolean }) {
   const currentPath = usePathname();
   const links = [
     {
@@ -79,17 +85,18 @@ function NavLinks({ theme }: { theme: string }) {
           <Link
             href={link.href}
             //Using library to dynamically assign class names
+            //checked = dark mode
             className={classnames({
               "text-zinc-800 font-semibold":
-                link.href === currentPath && theme === "light",
-              "text-zinc-500": link.href !== currentPath && theme === "light",
+                link.href === currentPath && !checked,
+              "text-zinc-500": link.href !== currentPath && !checked,
               "text-stone-100 font-semibold":
-                link.href === currentPath && theme === "dark",
-              "text-stone-400": link.href !== currentPath && theme === "dark",
+                link.href === currentPath && checked,
+              "text-stone-400": link.href !== currentPath && checked,
               "hover:text-zinc-800 transition-colors hover:border-b-2 border-yellow-400":
-                theme === "light",
+                !checked,
               "hover:text-stone-100 transition-colors hover:border-b-2 border-yellow-400":
-                theme === "dark",
+                !checked,
             })}
           >
             {link.label}
