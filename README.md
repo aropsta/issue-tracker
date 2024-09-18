@@ -22,6 +22,8 @@ A fullstack application used to track and manage different tickets: Feature requ
 
 ## Tech Stack
 
+Project deployed on vercel with backend database hosted on digitalOcean
+
 ### Frontend
 
 - Next.js |  React | Typescript
