@@ -2,23 +2,23 @@
 
 A fullstack application used to track and manage different tickets: Feature requests, issues or bugs
 
-## ![List View](/public/list.png)
+![Screenshot](/public/list.png)
 
 ## Feautures
 
 - View, edit, create and delete issues.
 - Assign tickets to different users
-- Sorting and filtering with various params
+- Sorting and filtering
 - Pagination
 - Google login and authentication
 
 ## MarkDown Editor
 
-![Edit](/public/edit.png)
+![Screenshot](/public/edit.png)
 
 ### Dark mode
 
-![Dark mode](/public/dark.png)
+![Screenshot](/public/dark.png)
 
 ## Tech Stack
 
